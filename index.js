@@ -90,12 +90,15 @@ class Airplane {
     } // fill
 
     drive(distance) {
-      this.odometer = this.odometer += distance;
-      this.tank = this.tank - (distance / this.milesPerGallon);
-      if (this.tank === 0) {
+      if (distance >= this.tank * this.milesPerGallon) {
+        this.odometer += this.tank * this.milesPerGallon;
+        this.tank = 0;
         return `I ran out of fuel at ${this.odometer} miles!`;
+      } else {
+        this.odometer += distance;
+        this.tank = ((this.tank * this.milesPerGallon) - distance) / this.milesPerGallon;
       }
-    }
+    } // drive
   } // Car
   
   /*
